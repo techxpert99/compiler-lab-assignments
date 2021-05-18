@@ -1,3 +1,9 @@
+/**
+  * Author: Ritik Jain, 18114068
+  * Since: May 18, 2021
+  * Brief: Defines The Data and Lookahead buffers for text processing units.
+*/
+
 #include "stdio.h"
 #include "string.h"
 
@@ -18,7 +24,7 @@ void error(const char *msg)
 {
     printf("Error: ");
     printf(msg);
-    printf('!\n');
+    printf("!\n");
 }
 
 void raw_input_open(const char *filename)
@@ -34,6 +40,7 @@ void raw_input_open(const char *filename)
 
 void raw_input_close()
 {
+    if(STREAM_CLOSED) return;
     STREAM_CLOSED = 1;
     fclose(INPUT_FILE);
 }
@@ -81,4 +88,45 @@ void load_data_buffer()
     DATA_SIZE = LOOKAHEAD_SIZE;
     LOOKAHEAD_USED = 0;
     load_lookahead_buffer();
+}
+
+int data_buffer_empty(){
+    return DATA_PTR == DATA_SIZE;
+}
+
+int data_buffer_full(){
+    return DATA_SIZE == BUFFER_SIZE;
+}
+
+int lookahead_buffer_empty(){
+    return LOOKAHEAD_PTR == LOOKAHEAD_SIZE;
+}
+
+int lookahead_buffer_full(){
+    return LOOKAHEAD_SIZE == BUFFER_SIZE;
+}
+
+int has_more_data(){
+    if(data_buffer_empty()) load_data_buffer();
+    if(data_buffer_empty()){
+        raw_input_close();
+        return 0;
+    }
+    return 1;
+}
+
+int has_more_lookahead(){
+    if(lookahead_buffer_empty()) load_lookahead_buffer();
+    if(lookahead_buffer_empty()) return 0;
+    return 1;
+}
+
+char pop_chr(){
+    if(!has_more_data()) return 0;
+    return DATA_BUFFER[DATA_PTR++];   
+}
+
+char peek_chr(){
+    if(!has_more_lookahead()) return 0;
+    return LOOKAHEAD_BUFFER[LOOKAHEAD_PTR++];
 }
