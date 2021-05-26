@@ -1,3 +1,9 @@
+/*
+ * Author: Ritik Jain, 18114068
+ * Since: May 19, 2021
+ * Brief: Compiler Lab Assignment- Program 1: Lexical Analyzer for C Programs
+ */
+
 #include "buffers.h"
 
 /*

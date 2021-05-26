@@ -1,0 +1,84 @@
+The symbols 'S' and '$' are reserved and cannot be a part of the grammar
+Enter the number of production rules in the Context Free Grammar: Selecting 'E' as the start symbol
+
+
+Canonical Set of LR(0) Items:
+
+State 0:              State 1:              State 2:              
+
+S -> . E              E -> id .             E -> ( . E )          
+E -> . id                                   E -> . id             
+E -> . ( E )                                E -> . ( E )          
+E -> . E * E                                E -> . E * E          
+E -> . E + E                                E -> . E + E          
+
+
+State 3:              State 4:              State 5:              
+
+E -> E . + E          E -> ( E ) .          E -> E * . E          
+E -> E . * E                                E -> . id             
+E -> ( E . )                                E -> . ( E )          
+                                            E -> . E * E          
+                                            E -> . E + E          
+
+
+State 6:              State 7:              State 8:              
+
+E -> E . + E          E -> E + . E          E -> E . + E          
+E -> E . * E          E -> . id             E -> E . * E          
+E -> E * E .          E -> . ( E )          E -> E + E .          
+                      E -> . E * E                                
+                      E -> . E + E                                
+
+
+State 9:              
+
+E -> E . + E          
+E -> E . * E          
+S -> E .              
+
+
+
+
+
+
+SLR(1) Parsing Table:
+
+STATE                                                                          ACTIONS                                                                                                 GOTO
+
+               +                               *                               (                   )                               id                  $                               E                S          
+
+0                                                                              shift to 2                                          shift to 1                                          go to 9          
+
+
+1              reduce with E -> id             reduce with E -> id                                 reduce with E -> id                                 reduce with E -> id                              
+
+
+2                                                                              shift to 2                                          shift to 1                                          go to 3          
+
+
+3              shift to 7                      shift to 5                                          shift to 4                                                                                           
+
+
+4              reduce with E -> ( E )          reduce with E -> ( E )                              reduce with E -> ( E )                              reduce with E -> ( E )                           
+
+
+5                                                                              shift to 2                                          shift to 1                                          go to 6          
+
+
+6              shift to 7                      shift to 5                                          reduce with E -> E * E                              reduce with E -> E * E                           
+               reduce with E -> E * E          reduce with E -> E * E                                                                                                                                   
+
+
+7                                                                              shift to 2                                          shift to 1                                          go to 8          
+
+
+8              shift to 7                      shift to 5                                          reduce with E -> E + E                              reduce with E -> E + E                           
+               reduce with E -> E + E          reduce with E -> E + E                                                                                                                                   
+
+
+9              shift to 7                      shift to 5                                                                                              reduce with S -> E                               
+
+
+
+

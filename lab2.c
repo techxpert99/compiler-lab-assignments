@@ -1,3 +1,9 @@
+/*
+ * Author: Ritik Jain, 18114068
+ * Since: May 19, 2021
+ * Brief: Compiler Lab Assignment- Program 2: Accepts the patterns 'a*', 'abb', 'a*b+'
+ */
+
 #include "stdio.h"
 #include "stdlib.h"
 

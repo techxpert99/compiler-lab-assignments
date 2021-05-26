@@ -1,3 +1,9 @@
+/*
+ * Author: Ritik Jain, 18114068
+ * Since: May 19, 2021
+ * Brief: Compiler Lab Assignment- Program 3: Calculates The First set of a given Context Free Grammar
+ */
+
 #include "stdio.h"
 #include "stdlib.h"
 #include "string.h"
@@ -72,7 +78,6 @@ int char_val(char c){
 }
 
 void map_non_terminals(char *cmap, char *heads, int num_prods){
-    char *map;
     int tmp;
     for(tmp=0;tmp<num_prods;tmp++)
         cmap[char_val(heads[tmp])] = 1;
@@ -145,8 +150,8 @@ int main(int argc, char **argv){
         if(tmp3 == '\r') getchar();
         tmp2 = parse_productions(buffer,heads,bodies,&tmp,num_prods);
         if(tmp2==1){
-            printf("Error: Unable to  parse rule #%d: %s",tmp+1,buffer);
-            for(tmp2=0;tmp2<tmp;tmp++)
+            printf("Error: Unable to  parse rule #%d: %s\n",tmp+1,buffer);
+            for(tmp2=0;tmp2<tmp;tmp2++)
                 free(bodies[tmp2]);
             free(bodies);
             free(heads);
@@ -154,7 +159,7 @@ int main(int argc, char **argv){
             return 0;
         }
         else if(tmp2==2){
-            printf("Warning: Production overflow detected. Considering only the first %d production(s)",num_prods);
+            printf("Warning: Production overflow detected. Considering only the first %d production(s)\n",num_prods);
             break;
         }
     }
